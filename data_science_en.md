@@ -15,6 +15,80 @@ Data Science tries to answer one of the following questions:
 ### Bayes Theorem
 
 ## Numpy
+Numpy is a package for scientific computing in Python.
+
+```python
+import numpy as np
+```
+
+The most important data structure is ndarray, which is short for n-dimensional array.
+
+You can convert a list to an numpy array with the array-method
+```
+my_list = [1, 2, 3, 4]
+my_array = np.array(my_list)
+```
+You can also convert an array back to a list with
+```
+my_new_list = my_array.tolist()
+```
+You can retrieve the dimensionality of an array with the ndim property:
+```
+my_array.ndim
+```
+and get the number of data points with the shape property
+```
+my_array.shape
+```
+
+### Vector arithmetic
+#### Addition / Subtraction
+```
+a = np.array([1, 2, 3, 4])
+b = np.array([4, 3, 2, 1])
+a + b
+array([5, 5, 5, 5])
+a - b
+array([-3, -1,  1,  3])
+```
+
+#### Scalar Multiplication
+
+```
+a = np.array([1, 2, 3, 4])
+a * 3
+array([3,  6,  9, 12])
+```
+
+To see why it is charming to use numpy’s array for this operation You have to consider the alternative:
+
+```
+c = [1,2,3,4]
+d = [x * 3 for x in c]
+```
+
+Dot Product
+
+```
+a = np.array([1,2,3,4]) 
+b = np.array([4,3,2,1])
+
+a.dot(b)
+```
+20 # 1*3 + 2*3 + 3*2 + 4*1
+
+### linspace function
+
+To create e.g. x-axis indices you can use the linspace function from numpy.
+You give it a range (e.g. 0 to 10) and the number of divisions and it will distribute the values evenly across that range. The stop values is included in the resulting value array by default.
+
+Example:
+```python
+import numpy as np
+np.linspace(0, 10, num=9)
+
+array([ 0. , 1.25, 2.5 , 3.75, 5. , 6.25, 7.5 , 8.75, 10. ]
+```
 
 ## Matplotlib
 matplotlib is the workhorse of data science visualization. The module pyplot gives us MATLAB like plots.
@@ -100,7 +174,57 @@ If You want to save the plot as a png you can replace the show command with
 
 plt.savefig('scatter_01.png')
 
+### Multiple Plots
 
+You might have wondered how to draw more than one line or curve into on plot. I will show you now.
+
+To make it a bit more interesting we generate two functions: sine and cosine. We generate our x-values with numpy’s linspace function
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2*np.pi)
+
+sin = np.sin(x)
+cos = np.cos(x)
+
+plt.plot(x, sin, color='b')
+plt.plot(x, cos, color='r')
+plt.show()
+
+You can plot two or more curves by repeatedly calling the plot method.
+
+![](images/pyplot_plot_21.png "")
+
+That’s fine as long as the individual plots share the same axis-description and values.
+
+### Subplots
+
+fig = plt.figure()
+p1 = fig.add_subplot(2, 1, 1)
+p2 = fig.add_subplot(2, 1, 2)
+p1.plot(x, sin, c='b')
+p2.plot(x, cos, c='r'
+
+The add_subplot method allows us to put many plots into one “parent” plot aka figure. 
+The arguments are (number_of_rows, number_of_columns, place in the matrix) 
+So in this example we have 2 rows in 1 column, sine is in first, cosine in second position:
+
+![](images/pyplot_plot_22.png "")
+
+when you have a 2 by 2 matrix it is counted from columns to row
+
+fig = plt.figure()
+p1 = fig.add_subplot(221)
+p2 = fig.add_subplot(222)
+p3 = fig.add_subplot(223)
+p4 = fig.add_subplot(224)
+p1.plot(x, sin, c='b')
+p2.plot(x, cos, c='r')
+p3.plot(x, -sin, c='g')
+p4.plot(x, -cos, c='y')
+
+![](images/pyplot_plot_23.png "")
 
 ## Pandas
 
