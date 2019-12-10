@@ -113,6 +113,7 @@ plt.plot([0, 1, 2, 3], [0, 1, 2, 3], "o")
 ![](images/pyplot_plot_03.png "")
 
 or you can highlight the individual points while drawing the line
+
 ```python
 plt.plot([0, 1, 2, 3], [0, 1, 2, 3], marker='o')
 ```
@@ -143,19 +144,25 @@ In /matplotlib/_color_data.py you find additional colors, even colors from the X
 
 plt.plot(x, y, color="xkcd:nasty green")
 
+```
 ![](images/pyplot_plot_05.png "")
+```
 
 ### Stroke width and style
 
 changing the width of the plotted line is done via linewidth
 
+```
 plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linewidth=7.0, color="xkcd:nasty green")
+```
 
 ![](images/pyplot_plot_06.png "")
 
 and the stroke style can be altered with the linestyle parameter
 
+```
 plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linestyle=":", color="xkcd:nasty green", linewidth=7.0)
+```
 
 ![](images/pyplot_plot_07.png "")
 
@@ -173,6 +180,24 @@ plt.xlabel('some numbers')
 If You want to save the plot as a png you can replace the show command with
 
 plt.savefig('scatter_01.png')
+
+### Scatterplot
+
+Here is another type of plot used in data science.
+
+A very basic visualization is the scatter plot:
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+N = 100
+x = np.random.rand(N)
+y = np.random.rand(N)
+
+plt.scatter(x, y)
+plt.show()
+
+![](images/scatter_01.png "")
 
 ### Multiple Plots
 
