@@ -29,6 +29,50 @@ The normal distribution was formulated by Carl Friedrich Gauß in 18XX and can b
         return math.exp(-(x-mu)**2 / 2 / sigma**2) / sqrt_two_pi * sigma
 
 ### Bayes Theorem
+Imagine that you come home from a party and you are stopped by the police. They ask you to take a drug test and you accept. 
+The test result is positive. You are guilty.
+
+But wait a minute! Is it really that simple?
+
+In Germany about 2.8 million people consume weed on a regular basis, that’s about 3.5% of the population.
+
+Let’s say D is drug addict and consumes weed regularly, ¬D consumes no weed. So the chance by randomly picking a person that he or she is a drug addict is P(D) = 0.035
+
+Because You either take drugs or you don’t the remaining part must be non-drug takers P(¬D) = 1 – P(D) = 0.965.
+
+The accuracy of a drug test is about 92%. So let’s assume that there are 8% false positives and 8% false negatives as well.
+
+The chance that if a person actually takes drugs the test result will be positive is P(+|D) = 0.92 but You also get a positive reuslt when a person doesn’t take drugs in 8% of all cases: P(+|¬D) = 0.08 These are called “False positives”.
+
+When a person doesn’t take drugs the test will be negative in 92% of all cases P(-|¬D) = 0.92.  And of course a test can also be negative even if a person takes drugs P(-|D) = 0.08. these are called “False negatives”. Got it?
+
+What comes next?
+
+Combined Probabilities
+
+Knowing the success and error rates of the test and the relative distribution of drug consumers we can calculate the combined probabilities:
+
+    P(+, D) = 0.035 * 0.92 = 0.0322
+        Think: The test is positive AND the person is a drug user
+    P(+, ¬D) = 0.965 * 0.08 = 0.0772
+        Think: The test is positive AND the person is NOT a drug user
+    P(-, D) = 0.035 * 0.08 = 0.0028
+        Think: The test is negative AND the person is a drug user
+    P(-, ¬D) = 0.965 * 0.92 = 0,8878
+        Think: The test is negative AND the person is NOT a drug user
+
+Bayes Theorem
+
+    P(A|B) = P(B|A) * P(A) / P(B)
+
+In our case we are interested in the probability of a person being a drug addict given the test is positive. That means:
+
+    P(D | +) = P(+ | D) * P(D) / P(+) = P(+ | D) * P(D) / ( P(+, D) + P(+, ¬D) ) 
+    = 0.92 * 0.035 / (0.0322 + 0.0772) = 0.294
+
+The outcome is quite interesting and mildly shocking: The probability that a person tested positively is actually a drug addict is only around 29% or less than one third!
+
+Why is this so counter intuitive, when the test states an accuracy of 92%?  That is the so called base rate fallacy. We have to take into account that only 3.5% of the population actually take drugs.
 
 ## Numpy
 Numpy is a package for scientific computing in Python.
@@ -290,6 +334,25 @@ Unsupervised Learning
 
 Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to figure out a structure given only the data
 
+### Naive Bayes
+
+    # training
+    print("Start training")
+    t0 = time()
+    clf = GaussianNB()
+    clf.fit(features_train, labels_train)
+    print("training time:", round(time() - t0, 3), "s")
+    
+    # prediction
+    print("start predicting")
+    t0 = time()
+    prediction = clf.predict(features_test)
+    print("predict time:", round(time() - t0, 3), "s")
+    
+    # accuracy
+    print("Calculating accuracy")
+    accuracy = accuracy_score(labels_test, prediction)
+    print("Accuracy calculated, and the accuracy is", accuracy)
 
 ## Classification
 ### Quality
