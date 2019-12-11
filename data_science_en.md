@@ -13,6 +13,8 @@ Data Science tries to answer one of the following questions:
 * Association -> “What is happening very often together?”
 ## Statistics
 
+### Mean, Median, 
+
 ### Distribuitions
 
 #### The Normal Distribution
@@ -48,7 +50,7 @@ When a person doesn’t take drugs the test will be negative in 92% of all cases
 
 What comes next?
 
-Combined Probabilities
+#### Combined Probabilities
 
 Knowing the success and error rates of the test and the relative distribution of drug consumers we can calculate the combined probabilities:
 
@@ -61,7 +63,7 @@ Knowing the success and error rates of the test and the relative distribution of
     P(-, ¬D) = 0.965 * 0.92 = 0,8878
         Think: The test is negative AND the person is NOT a drug user
 
-Bayes Theorem
+#### Bayes Theorem
 
     P(A|B) = P(B|A) * P(A) / P(B)
 
@@ -70,9 +72,11 @@ In our case we are interested in the probability of a person being a drug addict
     P(D | +) = P(+ | D) * P(D) / P(+) = P(+ | D) * P(D) / ( P(+, D) + P(+, ¬D) ) 
     = 0.92 * 0.035 / (0.0322 + 0.0772) = 0.294
 
-The outcome is quite interesting and mildly shocking: The probability that a person tested positively is actually a drug addict is only around 29% or less than one third!
+The outcome is quite interesting and mildly shocking: 
+The probability that a person tested positively is actually a drug addict is only around 29% or less than one third!
 
-Why is this so counter intuitive, when the test states an accuracy of 92%?  That is the so called base rate fallacy. We have to take into account that only 3.5% of the population actually take drugs.
+Why is this so counter intuitive, when the test states an accuracy of 92%?  That is the so called base rate fallacy. 
+We have to take into account that only 3.5% of the population actually take drugs.
 
 ## Numpy
 Numpy is a package for scientific computing in Python.
@@ -435,6 +439,82 @@ In this case 207 astronauts have a military rank.
     astronaut_data['Military Rank'].value_counts().head(1)
 
 which gives us 94 Colonels.
+
+## Feature Scaling
+
+What is Feature Scaling?
+
+Feature Scaling is an important pre-processing step for some machine learning algorithms.
+
+Imagine you have three friends of whom you know the individual weight and height.
+
+You would like to deduce Christian’s  t-shirt size from David’s and Julia’s by looking at the height and weight.
+
+| Name 	 | Height in m 	| Weight in kg 	| T-Shirt size |
+| ------ | ------------ | ------------- | ------------ |
+|Julia 	|1.58 |	52 |	Small|
+|David |	1.79 	|79 	|Large
+|Christian |	1.86 	|64 	|?
+
+One way You could determine the shirt size is to just add up the weight and the height of each friend. You would get:
+
+| Name 	| Height + weight 	| T-Shirt size |
+| ------ | ------------ | ------------- |
+| Julia |	53.58  |	Small|
+| David |	80.79  | Large |
+| Christian | 	65.86 |	
+
+Because Christian’s height + weight number is nearer to Julia’s number than to David’s, Christian should wear a small T-Shirt. What?
+
+### Feature Scaling Formula
+
+    x’ = (x – xmin) / (xmax – xmin)
+
+ 
+| Feature | 	min | 	max |
+| ------ | ------------ | ------------- |
+|Height |	1.58 |	1.86 |
+|Weight |	52 	| 79 |
+
+|Name | Scaled Height | Scaled Weight | Combined Scaled Height + Weight | T-Shirt size |
+| ------ | ------------ | ------------- | ------------ | ------------- |
+| Julia | 	0 |  	0 	| 0 |	Small
+| David | 	0.75 | 	1 | 	1.75 |	Large |
+| Christian | 	1  | 0.44 |	1.44 | 	?|
+
+If we look at the combined scaled properties we see that Christian’s value now is closer to David’s so we deduce that Christian shall wear a large shirt as well.
+Implementing feature scaling in python
+
+As a little coding practice we can implement a feature scaling algorithm in Python:
+
+    def feature_scaling(arr):
+        ret_arr = []
+        min_val = min(arr)
+        max_val = max(arr)
+        if min_val == max_val:
+            raise ZeroDivisionError()
+        for f in arr:
+            f = (f - min_val) / float((max_val - min_val))
+            ret_arr.append(f)
+        return ret_arr
+
+### MinMaxScaler from sklearn
+
+Instead of writing our own feature scaler we can we should use the MinMaxScaler from sklearn. It works with numpy arrays by default.
+
+    from sklearn.preprocessing import MinMaxScaler
+    import numpy as np
+    
+    weights = np.array([[52.0], [79.0], [64.0]])
+    scaler = MinMaxScaler()
+    rescaled_weight = scaler.fit_transform(weights)
+    print(rescaled_weight)
+
+### Affected Algorithms
+
+Which algorithms are affected by non-properly scaled features?
+
+SVM and k-means are algorithms which are affected. SVM for example calculates distances and when two features differ dramatically in value range, the feature with the greater range will dominate the other. (As seen when adding kilograms and meters)
 
 ## Machine Learning
 
