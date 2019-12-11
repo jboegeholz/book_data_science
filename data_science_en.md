@@ -220,9 +220,9 @@ plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linewidth=7.0, color="xkcd:nasty green")
 
 and the stroke style can be altered with the linestyle parameter
 
-```
-plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linestyle=":", color="xkcd:nasty green", linewidth=7.0)
-```
+
+    plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linestyle=":", color="xkcd:nasty green", linewidth=7.0)
+
 
 ![](images/pyplot_plot_07.png "")
 
@@ -230,8 +230,8 @@ plt.plot([0, 1, 2, 3], [0, 1, 2, 3], linestyle=":", color="xkcd:nasty green", li
 
 In school I learned that all axis of a plot must have labels. So let’s add them:
 
-plt.ylabel('some other numbers')
-plt.xlabel('some numbers')
+    plt.ylabel('some other numbers')
+    plt.xlabel('some numbers')
 
 ![](images/pyplot_plot_08.png "")
 
@@ -247,15 +247,15 @@ Here is another type of plot used in data science.
 
 A very basic visualization is the scatter plot:
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-N = 100
-x = np.random.rand(N)
-y = np.random.rand(N)
-
-plt.scatter(x, y)
-plt.show()
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    N = 100
+    x = np.random.rand(N)
+    y = np.random.rand(N)
+    
+    plt.scatter(x, y)
+    plt.show()
 
 ![](images/scatter_01.png "")
 
@@ -265,17 +265,17 @@ You might have wondered how to draw more than one line or curve into on plot. I 
 
 To make it a bit more interesting we generate two functions: sine and cosine. We generate our x-values with numpy’s linspace function
 
-import numpy as np
-import matplotlib.pyplot as plt
-
-x = np.linspace(0, 2*np.pi)
-
-sin = np.sin(x)
-cos = np.cos(x)
-
-plt.plot(x, sin, color='b')
-plt.plot(x, cos, color='r')
-plt.show()
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    x = np.linspace(0, 2*np.pi)
+    
+    sin = np.sin(x)
+    cos = np.cos(x)
+    
+    plt.plot(x, sin, color='b')
+    plt.plot(x, cos, color='r')
+    plt.show()
 
 You can plot two or more curves by repeatedly calling the plot method.
 
@@ -285,11 +285,11 @@ That’s fine as long as the individual plots share the same axis-description an
 
 ### Subplots
 
-fig = plt.figure()
-p1 = fig.add_subplot(2, 1, 1)
-p2 = fig.add_subplot(2, 1, 2)
-p1.plot(x, sin, c='b')
-p2.plot(x, cos, c='r'
+    fig = plt.figure()
+    p1 = fig.add_subplot(2, 1, 1)
+    p2 = fig.add_subplot(2, 1, 2)
+    p1.plot(x, sin, c='b')
+    p2.plot(x, cos, c='r'
 
 The add_subplot method allows us to put many plots into one “parent” plot aka figure. 
 The arguments are (number_of_rows, number_of_columns, place in the matrix) 
@@ -299,20 +299,142 @@ So in this example we have 2 rows in 1 column, sine is in first, cosine in secon
 
 when you have a 2 by 2 matrix it is counted from columns to row
 
-fig = plt.figure()
-p1 = fig.add_subplot(221)
-p2 = fig.add_subplot(222)
-p3 = fig.add_subplot(223)
-p4 = fig.add_subplot(224)
-p1.plot(x, sin, c='b')
-p2.plot(x, cos, c='r')
-p3.plot(x, -sin, c='g')
-p4.plot(x, -cos, c='y')
+    fig = plt.figure()
+    p1 = fig.add_subplot(221)
+    p2 = fig.add_subplot(222)
+    p3 = fig.add_subplot(223)
+    p4 = fig.add_subplot(224)
+    p1.plot(x, sin, c='b')
+    p2.plot(x, cos, c='r')
+    p3.plot(x, -sin, c='g')
+    p4.plot(x, -cos, c='y')
 
 ![](images/pyplot_plot_23.png "")
 
+### Styles
+    plt.style.available
+
+### Bar Plots
+
+    x_values = (0, 1, 2)
+    y_values = (5, 7, 3)
+    plt.bar(x_values, y_values, width = 0.35)
+    plt.xticks(x_values, ('B1', 'B2', 'B3'))
+
+![](images/pyplot_bar_plot.png "")
+
+    plt.barh(x_values, (5, 7, 3))
+
+![](images/pyplot_bar_plot_h.png "")
+
+#### Broken Bar
+    fig, ax = plt.subplots()
+    ax.broken_barh([(0, 120), (150, 10)], (10, 9))
+
+![](images/pyplot_bar_plot_broken.png "")
+    
+    fig, ax = plt.subplots()
+    ax.broken_barh([(0, 120), (150, 10)], (10, 9))
+    ax.broken_barh([(0, 30), (150, 10)], (20, 9))
+    ax.set_ylim(5, 35)
+    ax.set_xlim(0, 200)
+    ax.set_xlabel('seconds since start')
+    ax.set_yticks([15, 25])
+    ax.set_yticklabels(['Bill', 'Jim'])
+
+![](images/pyplot_bar_plot_subplot.png "")
+
+### Pie Charts
+
 ## Pandas
 
+Pandas is a data analyzing tool. Together with numpy and matplotlib it is part of the data science stack
+
+You can install it via
+
+pip install pandas
+
+Working with real data
+
+The data set we are using is the astronauts data set from kaggle:
+
+Download Data Set NASA Astronauts from Kaggle
+
+During this introduction we want to answer the following questions
+
+* Which American astronaut has spent the most time in space?
+* What university has produced the most astronauts?
+* What subject did the most astronauts major in at college?
+* Have most astronauts served in the military? What rank did they achieve?
+
+Basic Usage
+
+    import pandas as pd
+
+    astronaut_data = pd.read_csv("./astronauts.csv")
+
+With the len function You can get the number of rows in the dataset
+
+    len(astronaut_data)
+
+which gives us 357 astronauts
+
+The columns property gives you the names of the individual columns
+
+    astronaut_data.columns
+
+The methods head() gives you the first five entries:
+
+    astronaut_data.head()
+
+whereas the tail method gives you the last n entries
+
+    astronaut_data.tail(10)
+
+With the iloc keyword You get the entries directly
+
+    astronaut_data.iloc[0]
+
+Which American astronaut has spent the most time in space?
+
+    most_time_in_space = astronaut_data.sort_values(by="Space Flight (hr)", ascending=False).head(1)
+    most_time_in_space[['Name', 'Space Flight (hr)']]
+
+Sorting the dataframe can be done with sort_by_values. And for this question we sort for Space Flight (hr). Because we want the most hours we have to sort descending which translates to ascending=False.
+
+head(1) gives us the correct answer:
+
+Jeffrey N. Williams. He spent 12818 hours (534 days) in space.
+
+Have You heard of him? Unsung hero!
+
+Hint: the Dataset was updated the last time in 2017. As of 2019 Peggy Whitson is the american who has spent the most time in space. 
+She has spend more than 665 days in space!
+
+What university has produced the most astronauts?
+
+The method value_counts is used to count the number of occurences of unique values
+
+    astronaut_data['Alma Mater'].value_counts().head(1)
+
+The US Naval Academy produced 12 astronauts
+What subject did the most astronauts major in at college?
+
+    astronaut_data['Undergraduate Major'].value_counts().head(1)
+
+The same here: use value_counts method on the Undergraduate Major column.
+The answer is Physics: 35 Astronauts studied physics in college
+Have most astronauts served in the military?
+
+the count method returns the number of entries which are not null or not NaN
+
+    astronaut_data['Military Rank'].count()
+
+In this case 207 astronauts have a military rank.
+
+    astronaut_data['Military Rank'].value_counts().head(1)
+
+which gives us 94 Colonels.
 
 ## Machine Learning
 
