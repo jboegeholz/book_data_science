@@ -17,9 +17,9 @@ Data Science tries to answer one of the following questions:
 ## Numpy
 Numpy is a package for scientific computing in Python.
 
-```python
-import numpy as np
-```
+
+    import numpy as np
+
 
 The most important data structure is ndarray, which is short for n-dimensional array.
 
@@ -273,5 +273,153 @@ Imagine you have images of pets and the labels are the name of the pets.
 Unsupervised Learning
 
 Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to figure out a structure given only the data
+
+
+## Classification
+### Quality
+### Confusion Matrix
+Let’s take the example
+
+y_true = ["dog", "dog",     "non-dog", "non-dog", "dog", "dog"]
+y_pred = ["dog", "non-dog", "dog",     "non-dog", "dog", "non-dog"]
+
+When we look at the prediction we can count the correct and incorrect classifications:
+
+    dog correctly classified as dog: 2 times (True Positive)
+    non-dog incorrectly classified as dog: 1 time (False Positive)
+    dog incorrectly classified as non-dog: 2 times (False Negative)
+    non-dog correctly classified as non-dog: 1 time (True Negative)
+
+When we visualize these results in a matrix we already have the confusion matrix:
+
+![](images/confusion_matrix.png "")
+
+#### sklearn
+
+We can calculate the confusion matrix with sklearn in a very simple manner
+
+    from sklearn.metrics import confusion_matrix
+    print(confusion_matrix(y_true, y_pred, labels=["dog", "non-dog"]))
+
+the output is:
+
+    [[2 2]
+    [1 1]]
+
+which can be indeed confusing because the matrix is transposed. 
+In contrast to our matrix from above the columns are the prediction and the rows are the actual values:
+
+![](images/confusion_matrix_2.png "")
+
+And that’s all – if you just have a binary classifier.
+Multi-label classifier
+
+So what happens, when your classifier can decide between three outcomes, say dog, cat and rabbit? (You can generate the test data with numpy random choice)
+
+y_true = ['rabbit', 'dog', 'rabbit', 'cat', 'cat', 'cat', 'cat', 'dog', 'cat']
+y_pred = ['rabbit', 'rabbit', 'dog', 'cat', 'dog', 'rabbit', 'dog', 'cat', 'dog']
+
+cm = confusion_matrix(y_true, y_pred, labels=["dog", "rabbit", "cat"])
+
+[[0 1 1]
+[1 1 0]
+[3 1 1]]
+
+Precision and Recall
+
+In the realms of Data Science you’ll encounter sooner or the later the terms “Precision” and “Recall”. But what do they mean?
+
+Living together with little kids You very often run into classification issues:
+
+My daughter really likes dogs, so seeing a dog is something positive. When she sees a normal dog e.g. a Labrador and proclaims: “Look, there is a dog!”
+
+That’s a True Positive (TP)
+
+If she now sees a fat cat and proclaims: “Look at the dog!” we call it a False Positive (FP), because her assumption of a positive outcome (a dog!) was false.
+
+If I point at a small dog e.g. a Chihuahua and say “Look at the dog!” and she cries: “This is not a dog!” but indeed it is one, we call that a False negatives (FN)
+
+And last but not least, if I show her a bird and we agree on the bird not being a dog we have a True Negative (TN)
+
+This neat little matrix shows all of them in context:
+
+![](images/precision_and_recall.png "")
+
+If I show my daughter twenty pictures of cats and dogs (8 cat pictures and 12 dog pictures) and she identifies 10 as dogs but out of ten dogs there are actually 2 cats her precision is 8 / (8+2) = 4/5 or 80%.
+
+    Precision = TP / (TP + FP)
+
+![](images/precision.png "")
+
+Knowing that there are actually 12 dog pictures and she misses 4 (false negatives) her recall is 8 / (8+4) = 2/3 or roughly 67%
+
+    Recall = TP / (TP + FN)
+
+![](images/recall.png "")
+
+Which measure is more important?
+
+It depends:
+
+If you’re a dog lover it is better to have a high precision, when you are afraid of dogs say to avoid dogs, a higher recall is better 🙂
+
+
+Different terms
+
+Precision is also called Positive Predictive Value (PPV)
+
+Recall often is also called
+
+* True positive rate
+* Sensitivity
+* Probability of detection
+
+Other interesting measures
+Accuracy
+
+    ACC = (TP + TN) / (TP + FP + TN + FN)
+
+![](images/accuracy.png "")
+
+F1-Score
+
+You can combine Precision and Recall to a measure called F1-Score. It is the harmonic mean of precision and recall
+
+    F1 = 2 / (1 / Precision + 1 / Recall)
+
+#### Scikit-Learn
+
+scikit-learn being a one-stop-shop for data scientists does of course offer functions for calculating precision and recall:
+
+    from sklearn.metrics import precision_score
+
+    y_true = ["dog", "dog", "not-a-dog", "not-a-dog", "dog", "dog"]
+    y_pred = ["dog", "not-a-dog", "dog", "not-a-dog", "dog", "not-a-dog"]
+
+    print(precision_score(y_true, y_predicted , pos_label="dog"))
+
+Let’s assume we trained a binary classifier which can tell us “dog” or “not-a-dog”
+
+In this example the precision is 0.666 or ~67% because in two third of the cases the algorithm was right when it predicted a dog
+
+    from sklearn.metrics import recall_score
+
+    print(recall_score(y_true, y_pred, pos_label="dog"))
+
+The recall was just 0.5 or 50% because out of 4 dogs it just identified 2  correctly as dogs.
+
+    from sklearn.metrics import accuracy_score
+
+    print(accuracy_score(y_true, y_pred))
+
+The accuracy was also just 50% because out of 6 items it made only 3 correct predictions.
+
+    from sklearn.metrics import f1_score
+
+    print(f1_score(y_true, y_pred, pos_label="dog"))
+
+The F1 score is 0.57 – just between 0.5 and 0.666.
+
+What other scores do you encounter? – stay tuned for the next episode 🙂
 
 ## scikit-learn
