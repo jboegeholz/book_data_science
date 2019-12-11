@@ -208,9 +208,9 @@ In /matplotlib/_color_data.py you find additional colors, even colors from the X
 
 plt.plot(x, y, color="xkcd:nasty green")
 
-```
+
 ![](images/pyplot_plot_05.png "")
-```
+
 
 ### Stroke width and style
 
@@ -243,7 +243,7 @@ In school I learned that all axis of a plot must have labels. So let’s add the
 
 If You want to save the plot as a png you can replace the show command with
 
-plt.savefig('scatter_01.png')
+    plt.savefig('scatter_01.png')
 
 ### Scatterplot
 
@@ -356,7 +356,7 @@ Pandas is a data analyzing tool. Together with numpy and matplotlib it is part o
 
 You can install it via
 
-pip install pandas
+    pip install pandas
 
 Working with real data
 
