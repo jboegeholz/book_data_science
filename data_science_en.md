@@ -420,6 +420,27 @@ The accuracy was also just 50% because out of 6 items it made only 3 correct pre
 
 The F1 score is 0.57 – just between 0.5 and 0.666.
 
-What other scores do you encounter? – stay tuned for the next episode 🙂
+#### ROC Curve
+
+As we already introduced Precision and Recall  the ROC curve is another way of looking at the quality of classification algorithms.
+
+ROC stands for Receiver Operating Characteristic
+
+The ROC curve is created by plotting the true positive rate (TPR) on the y-axis against the false positive rate (FPR) on the x-axis at various threshold settings.
+
+You already know the TPR as recall or sensitivity.
+
+![](images/recall.png "")
+
+The false positive rate is defined as FPR = FP / (FP + TN)
+
+![](images/false_positive_rate.png "")
+
+##### Advantage
+
+ROC curves have a big advantage: they are insensitive to changes in class distribution.
+##### sklearn
+
+    from sklearn.metrics import roc_curve
 
 ## scikit-learn
