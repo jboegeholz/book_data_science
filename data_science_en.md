@@ -358,7 +358,46 @@ You can install it via
 
     pip install pandas
 
-Working with real data
+For basic usage You import pandas as follows
+    
+     import pandas as pd 
+
+### DataFrame
+
+The basic data structure is the so called DataFrame.
+
+    df = pd.DataFrame()
+
+![](images/data_frame.png "")
+
+```
+df = pd.DataFrame({'age': [28, 35, 23],
+                   'weight': [72, 88, 62],
+                   'city':['Manhattan', 'Baltimore', 'Louisville']
+                  },
+                  index=['Peter', 'Paul', 'Mary'])
+```              
+
+You can access data from the dataframe via loc and iloc
+
+    df.loc["Peter", 'age']
+
+gives you 28
+
+You can achieve the same outcome with
+
+    df.iloc[0, 0]
+
+the i in iloc stands for "index"
+
+the colon is used as a wildcard for rows or columns
+    
+    df.loc[:, :]
+
+
+
+
+### Working with real data
 
 The data set we are using is the astronauts data set from kaggle:
 
