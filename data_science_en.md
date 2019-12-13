@@ -13,7 +13,14 @@ Data Science tries to answer one of the following questions:
 * Association -> “What is happening very often together?”
 ## Statistics
 
-### Mean, Median, 
+### Mean, Median, Mode
+
+#### Mean
+    mean = sum(data) / len(data)
+    
+#### Median
+
+#### Mode
 
 ### Distribuitions
 
@@ -378,6 +385,10 @@ df = pd.DataFrame({'age': [28, 35, 23],
                   index=['Peter', 'Paul', 'Mary'])
 ```              
 
+You cab get the column names via 
+      
+    df.columns
+    
 You can access data from the dataframe via loc and iloc
 
     df.loc["Peter", 'age']
@@ -394,7 +405,9 @@ the colon is used as a wildcard for rows or columns
     
     df.loc[:, :]
 
+#### Adding columns
 
+    df.loc[:, 'new_column_name'] = new_column_data
 
 
 ### Working with real data
@@ -575,6 +588,24 @@ Unsupervised Learning
 
 Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to figure out a structure given only the data
 
+
+
+
+### Support Vector Machines
+
+### PCA
+
+### Regression
+
+### Decision Trees
+
+## Clustering
+
+
+
+## Classification
+
+
 ### Naive Bayes
 
     # training
@@ -595,7 +626,8 @@ Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to 
     accuracy = accuracy_score(labels_test, prediction)
     print("Accuracy calculated, and the accuracy is", accuracy)
 
-## Classification
+Why is NB called naive?
+
 ### Quality
 ### Confusion Matrix
 Let’s take the example
@@ -763,4 +795,3 @@ ROC curves have a big advantage: they are insensitive to changes in class distri
 
     from sklearn.metrics import roc_curve
 
-## scikit-learn
