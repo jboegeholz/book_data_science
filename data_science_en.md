@@ -22,7 +22,26 @@ Data Science tries to answer one of the following questions:
 
 #### Mode
 
-### Distribuitions
+#### Interquartile Range
+
+### Distributions
+#### Law of large numbers
+
+### Discrete distributions
+
+#### Binomial distribution
+
+#### Poisson distribution
+Poisson Process
+* Events are independent of each other. The occurrence of one event does not affect the probability that another event will occur.
+* The average rate (events per time period) is constant.
+* Two events cannot occur at the same time.
+
+### Continuous Distributions
+
+#### Uniform Distribution
+
+#### Exponential Distribution
 
 #### The Normal Distribution
 
@@ -36,6 +55,9 @@ The normal distribution was formulated by Carl Friedrich Gauß in 18XX and can b
     def normal_distribution(x, mu=0, sigma=1):
         sqrt_two_pi = math.sqrt(2*math.pi)
         return math.exp(-(x-mu)**2 / 2 / sigma**2) / sqrt_two_pi * sigma
+
+#### Binominal Distribution
+#### Possion Distribution
 
 ### Bayes Theorem
 Imagine that you come home from a party and you are stopped by the police. They ask you to take a drug test and you accept. 
@@ -357,9 +379,33 @@ when you have a 2 by 2 matrix it is counted from columns to row
 
 ### Pie Charts
 
-## Pandas
+    preferences = [30, 20, 25, 15]
+    plt.pie(preferences)
 
-Pandas is a data analyzing tool. Together with numpy and matplotlib it is part of the data science stack
+![](images/pyplot_pie_chart_01.png "")
+
+To add the percentages into the chart you can use the attribute autopct
+
+    plt.pie(preferences, autopct='%1.1f%%')
+
+![](images/pyplot_pie_chart_02.png "")
+
+#### Adding Legend
+    
+    fig, ax = plt.subplots()
+    
+    ax.pie(preferences, autopct='%1.1f%%')
+    
+    ax.legend(labels,
+              title="Favorite Foods",
+              loc="center left",
+              bbox_to_anchor=(1, 0, 0.5, 1))
+              
+              
+![](images/pyplot_pie_chart_03.png "")            
+
+## Pandas
+Pandas is an akronym for "Python Data Analysis Library". Together with numpy and matplotlib it is part of the data science stack
 
 You can install it via
 
@@ -596,6 +642,10 @@ Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to 
 ### PCA
 
 ### Regression
+
+#### Linear Regression → Vanilla Linear Regression
+
+#### Lasso, Ridge, Elastic-Net Regression
 
 ### Decision Trees
 
