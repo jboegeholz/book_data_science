@@ -390,6 +390,14 @@ To add the percentages into the chart you can use the attribute autopct
 
 ![](images/pyplot_pie_chart_02.png "")
 
+#### Adding Labels
+
+    labels = 'Pizza', 'Hot Dogs', 'Tapas', 'Burger'
+    preferences = [30, 20, 25, 15]
+    plt.pie(preferences, labels=labels, autopct='%1.1f%%')
+    
+![](images/pyplot_pie_chart_04.png "")      
+
 #### Adding Legend
     
     fig, ax = plt.subplots()
@@ -403,6 +411,8 @@ To add the percentages into the chart you can use the attribute autopct
               
               
 ![](images/pyplot_pie_chart_03.png "")            
+
+     
 
 ## Pandas
 Pandas is an akronym for "Python Data Analysis Library". Together with numpy and matplotlib it is part of the data science stack
