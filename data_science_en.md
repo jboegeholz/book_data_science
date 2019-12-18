@@ -349,14 +349,31 @@ when you have a 2 by 2 matrix it is counted from columns to row
 
 ### Bar Plots
 
-    x_values = (0, 1, 2)
-    y_values = (5, 7, 3)
-    plt.bar(x_values, y_values, width = 0.35)
-    plt.xticks(x_values, ('B1', 'B2', 'B3'))
+    years = (2017, 2018, 2019)
+    revenue = (5000, 7000, 9000)
+    plt.bar(years, revenue, width=0.35)
+    plt.xticks(years)
+    plt.title("Revenue over years")
 
 ![](images/pyplot_bar_plot.png "")
 
-    plt.barh(x_values, (5, 7, 3))
+#### Stacked Bar
+    years = (2017, 2018, 2019)
+    revenue_customer_a = (2500, 2300, 2000)
+    revenue_customer_b = (2500, 4700, 7000)
+    width = 0.35       
+    
+    p1 = plt.bar(years, revenue_customer_a, width)
+    p2 = plt.bar(years, revenue_customer_b, width, bottom=revenue_customer_a)
+    
+    plt.title('Revenue over years')
+    plt.xticks(years)
+    plt.legend((p1[0], p2[0]), ("Customer A", "Customer B"))
+    
+![](images/pyplot_stacked_bar.png "")
+
+#### Horizontal Bar
+    plt.barh(years, revenue)
 
 ![](images/pyplot_bar_plot_h.png "")
 
