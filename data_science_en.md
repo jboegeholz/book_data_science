@@ -672,6 +672,21 @@ Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to 
 
 #### Linear Regression → Vanilla Linear Regression
 
+##### Derivation
+
+The regression line can be described as follows:
+
+ŷ<sub>t</sub> = &beta;<sub>0</sub> + &beta;<sub>1</sub>&sdot;x<sub>t</sub>
+
+The error is the difference between the actual value and the value on the regression line:
+
+&epsilon;<sub>t</sub> = y<sub>t</sub> - ŷ<sub>t</sub> = y<sub>t</sub> - (&beta;<sub>0</sub> + &beta;<sub>1</sub>&sdot;x<sub>t</sub>) = y<sub>t</sub> - &beta;<sub>0</sub>  &beta;<sub>1</sub>&sdot;x<sub>t</sub>
+
+Because we cannot optimize every error individually we sum up all errors. Due to the fact that errors can be negative as well
+we like to square the errors before summing them up.
+
+&sum; &epsilon;<sub>t</sub><sup>2</sup> = &sum; (y<sub>t</sub> - &beta;<sub>0</sub>  &beta;<sub>1</sub>&sdot;x<sub>t</sub>)<sup>2</sup>
+
 #### Lasso, Ridge, Elastic-Net Regression
 
 ### Decision Trees
