@@ -198,6 +198,10 @@ plt.show()
 ```
 The plot function takes an x and y array and draws a blue line through all points.
 
+Hint: When using JuPyter you can embed the images with the magic command
+    
+    %matplotlib inline
+
 You can of course draw each point independently without a line:
 
 ```python
@@ -461,6 +465,15 @@ df = pd.DataFrame({'age': [28, 35, 23],
 You cab get the column names via 
       
     df.columns
+    
+You can get an overview of the dataframe values with
+
+    df.describe()
+    
+More information about the data frame 
+
+    df.shape 
+    df.dtypes 
     
 You can access data from the dataframe via loc and iloc
 
