@@ -1,2 +1,2 @@
 echo Creating PDF version
-pandoc metadata.yaml sotw_de.md -o Solo_der_Woche.pdf --from markdown -V lang=de-DE  -V geometry:margin=3cm -V papersize=a4paper -fmarkdown-implicit_figures
+pandoc metadata.yaml data_science_en.md -o Data_Science.pdf --pdf-engine=xelatex --from markdown --variable mainfont=Georgia -V lang=de-DE  -V geometry:margin=3cm -V papersize=a4paper -fmarkdown-implicit_figures

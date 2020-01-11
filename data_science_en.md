@@ -11,6 +11,9 @@ Data Science tries to answer one of the following questions:
 * Clustering -> “Are there groups which belong together?”
 * Regression -> “How will it develop in the future?”
 * Association -> “What is happening very often together?”
+
+\pagebreak
+
 ## Statistics
 
 ### Mean, Median, Mode
@@ -688,7 +691,8 @@ Your data doesn’t have labels. Your algorithm e.g. k-means clustering need to 
 
 ### Regression
 
-#### Linear Regression → Vanilla Linear Regression
+#### Linear Regression 
+
 
 ##### Derivation
 
