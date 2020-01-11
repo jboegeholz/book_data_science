@@ -495,6 +495,11 @@ the colon is used as a wildcard for rows or columns
 
     df.loc[:, 'new_column_name'] = new_column_data
 
+#### Accessing Data Souces
+
+    pd.read_csv()
+    pd.read_sql(
+    pd.read_excel()
 
 ### Working with real data
 
