@@ -648,6 +648,10 @@ Instead of writing our own feature scaler we can we should use the MinMaxScaler 
     rescaled_weight = scaler.fit_transform(weights)
     print(rescaled_weight)
 
+
+### Standard Scaler
+
+
 ### Affected Algorithms
 
 Which algorithms are affected by non-properly scaled features?
