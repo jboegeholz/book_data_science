@@ -1,0 +1,14 @@
+---
+title: "Data Science"
+subtitle: ""
+author: [Jörn Bögeholz]
+titlepage: true
+toc: true
+toc-own-page: true
+toc-depth: 5
+fontsize: 12pt
+fontfamily: arev
+include-before:
+- '`\newpage{}`{=latex}'
+- '\pagenumbering{gobble}'
+---
